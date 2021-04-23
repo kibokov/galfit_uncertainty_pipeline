@@ -3,26 +3,20 @@ A simple code for preparing .fits "cutouts" of blank regions of sky to inject ga
 
 '''
 import configparser
-import numpy as np
-import numpy as np
 import os
 import shutil
 import matplotlib.pyplot as plt
 import re
-from astropy.io import fits
-import matplotlib.pyplot as plt 
 from astropy.visualization.stretch import SinhStretch, LinearStretch
 from astropy.visualization import ImageNormalize
 from astropy.visualization import ZScaleInterval
 import matplotlib.patches as patches
-import numpy as np
 from astropy.stats import sigma_clipped_stats
 from scipy import spatial
 import numpy as np 
 from astropy.stats import sigma_clip
 from astropy.io import fits
 import random
-import matplotlib.pyplot as plt
 
 def print_stage(line2print, ch='-'):
     '''
