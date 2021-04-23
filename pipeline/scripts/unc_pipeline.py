@@ -10,18 +10,6 @@ from compute_unc import compute_unc
 from galshift import galshift
 import concurrent.futures
 
-def argument_parser():
-    '''
-    Function that parses the arguments passed while running a script
-
-	fits : str, the multi extension fits file outputted by galfit
-	for_cutout: str, True of False
-    '''
-    result = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    # path to the config file with parameters and information about the run
-    result.add_argument('-ini', dest='ini', type=str) 
-    return result
-
 def print_stage(line2print, ch='-'):
     '''
     Function that prints lines for organizational purposes in the code outputs.
@@ -37,29 +25,6 @@ def print_stage(line2print, ch='-'):
     print(ch*nl)
     print(' ')
 
-def read_config_file(config_file=None):
-    '''
-    Function that reads the ini file
-
-    Parameters:
-    -------------
-    config_file: str, path to the config file
-
-    Returns:
-    ------------
-    iniconf: dict, dictionary of parameters in the config file
-
-    '''
-
-    if config_file is None:
-        raise ValueError('input configuration file is not provided. Use -ini config_file_path to specify the config file')
-
-    if not os.path.isfile(config_file):
-        raise ValueError('input configuration file {:s} does not exist!'.format(config_file))
-
-    iniconf = ConfigParser(interpolation=ExtendedInterpolation())
-    iniconf.read(config_file)  
-    return iniconf 
 
 
 def run_in_parallel(func, iter_input):
@@ -87,17 +52,12 @@ def run_gal(gpi):
     return 
 
 
-if __name__ == '__main__': 
-
-    # read in command line arguments
-    args = argument_parser().parse_args()
-    # read parameters and information from the run config file 
-    iniconf = read_config_file(config_file=args.ini)
+def unc_pipeline(iniconf):
 
     pipeline_dir = iniconf['core info']['pipeline_dir']
     sky_dir = iniconf['core info']['sky_dir']
     data_dir = iniconf['core info']['data_dir']
-    scripts_dir = iniconf['core info']['scripts_dir']
+    # scripts_dir = iniconf['core info']['scripts_dir']
     psf_fits = iniconf['uncertainty calc']['psf_fits']
 
     lipwig = iniconf['uncertainty calc']['lipwig']
@@ -191,6 +151,8 @@ if __name__ == '__main__':
     #clean all the galfit 
     os.chdir(pipeline_dir)
     os.system('find . -name "galfit.*" -type f -delete')
+
+    return 
 
 
 

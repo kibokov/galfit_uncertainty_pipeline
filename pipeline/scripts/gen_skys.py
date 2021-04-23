@@ -27,7 +27,7 @@ def bootstrap_sky(iniconf):
 
     data_dir = iniconf['core info']['data_dir']
     output_dir = iniconf['core info']['output_dir']
-    temp_dir = iniconf['core info']['temp_dir']
+    sky_dir = iniconf['core info']['sky_dir']
 
 
     org_fits = data_dir + "/" + iniconf['uncertainty calc']['org_fits']
@@ -71,11 +71,11 @@ def bootstrap_sky(iniconf):
         new_sky = clip_pixs[rand_inds]
         #we add this sky to the galfit model
         final_mock = new_sky + model_slice 
-        temp_name = temp_dir + "/" + "new_skycut_%d.fits"%i
+        sky_name = sky_dir + "/" + "new_skycut_%d.fits"%i
 
         #save this new fits file 
         # hdu = fits.PrimaryHDU(final_mock)
-        fits.writeto(temp_name, final_mock,org_header,overwrite = True)
+        fits.writeto(sky_name, final_mock,org_header,overwrite = True)
 
         #the corresponding .gal files for these fits file are created in run_unc_pipeline.py
 
