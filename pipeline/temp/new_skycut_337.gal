@@ -1,0 +1,231 @@
+================================================================================
+# IMAGE and GALFIT CONTROL PARAMETERS
+A) pipeline/temp/new_skycut_337.fits				 # <<<<<< file you want to fit
+B) pipeline/temp/new_skycut_337_output.fits				 # <<<<<< output file name
+C) none                # Sigma image name (made from data if blank or "none") 
+D) pipeline/test/psf.fits				 # <<<<<< input PSF image and (optional) diffusion kernel 
+E) 1                   # PSF fine sampling factor relative to data 
+F) none                # <<<<<< mask image (0=use, 1=ignore)
+G) pipeline/test/cons.txt				 # <<<<<< File with parameter constraints (ASCII file) 
+H) 1 96 1 78  # <<<<<< region in A) for fit, as x1 x2 y1 y2 
+I) 96 78             # size of the convolution
+J) 31.169              # <<<<<< Magnitude photometric zeropoint * 
+K) 0.200  0.200       # Image scale in arcsec/pix
+O) regular             # Display type (regular, curses, both)
+P) 0                   # <<<<<< Choose: 0=optimize, 1=model, 2=imgblock, 3=subcomps **
+
+================================================================================
+
+ 0) sersic             # Object type
+ 1) 79.72890000000001  40.9246  1 1    # position x, y        [pixel]
+ 3) 20.7151      1       # total magnitude    
+ 4) 2.379     1       #     R_e              [Pixels]
+ 5) 0.9744       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.822       1       # axis ratio (b/a)   
+10) -72.8482       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 81.01139999999998  42.05269999999999  1 1    # position x, y        [pixel]
+ 3) 22.8327      1       # total magnitude    
+ 4) 5.6334     1       #     R_e              [Pixels]
+ 5) 0.5       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.07       1       # axis ratio (b/a)   
+10) 71.8971       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 61.388300000000015  54.56650000000002  1 1    # position x, y        [pixel]
+ 3) 20.0849      1       # total magnitude    
+ 4) 8.2303     1       #     R_e              [Pixels]
+ 5) 5.8473       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.7073       1       # axis ratio (b/a)   
+10) -46.0261       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 61.3886  54.56639999999999  1 1    # position x, y        [pixel]
+ 3) 20.0849      1       # total magnitude    
+ 4) 8.2299     1       #     R_e              [Pixels]
+ 5) 5.8485       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.7073       1       # axis ratio (b/a)   
+10) -46.0724       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 61.38929999999999  54.56619999999998  1 1    # position x, y        [pixel]
+ 3) 20.0849      1       # total magnitude    
+ 4) 8.2274     1       #     R_e              [Pixels]
+ 5) 5.8559       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.707       1       # axis ratio (b/a)   
+10) -46.1876       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 55.59719999999999  38.53550000000001  1 1    # position x, y        [pixel]
+ 3) 20.6374      1       # total magnitude    
+ 4) 2.0966     1       #     R_e              [Pixels]
+ 5) 1.1867       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.8389       1       # axis ratio (b/a)   
+10) 61.9915       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 37.536400000000015  45.00290000000001  1 1    # position x, y        [pixel]
+ 3) 19.4421      1       # total magnitude    
+ 4) 4.4518     1       #     R_e              [Pixels]
+ 5) 3.916       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.6978       1       # axis ratio (b/a)   
+10) -34.3532       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 38.03820000000002  41.7817  1 1    # position x, y        [pixel]
+ 3) 20.0562      1       # total magnitude    
+ 4) 3.46     1       #     R_e              [Pixels]
+ 5) 2.0302       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.4765       1       # axis ratio (b/a)   
+10) -1.0214       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 38.30630000000002  40.6319  1 1    # position x, y        [pixel]
+ 3) 20.1975      1       # total magnitude    
+ 4) 1.9558     1       #     R_e              [Pixels]
+ 5) 5.496       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.8044       1       # axis ratio (b/a)   
+10) 53.8434       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 32.2184  47.981100000000026  1 1    # position x, y        [pixel]
+ 3) 20.5412      1       # total magnitude    
+ 4) 6.8259     1       #     R_e              [Pixels]
+ 5) 8.0       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.6162       1       # axis ratio (b/a)   
+10) 30.2943       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 37.735299999999995  50.185400000000016  1 1    # position x, y        [pixel]
+ 3) 20.1165      1       # total magnitude    
+ 4) 21.5647     1       #     R_e              [Pixels]
+ 5) 3.0385       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.3891       1       # axis ratio (b/a)   
+10) -32.0081       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 40.28550000000001  46.41719999999998  1 1    # position x, y        [pixel]
+ 3) 20.8699      1       # total magnitude    
+ 4) 3.5452     1       #     R_e              [Pixels]
+ 5) 3.7949       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.3467       1       # axis ratio (b/a)   
+10) -51.6987       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 15.332999999999998  48.77710000000002  1 1    # position x, y        [pixel]
+ 3) 21.1795      1       # total magnitude    
+ 4) 2.1889     1       #     R_e              [Pixels]
+ 5) 2.1766       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.3938       1       # axis ratio (b/a)   
+10) 31.8169       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 15.729800000000012  53.01830000000001  1 1    # position x, y        [pixel]
+ 3) 21.625      1       # total magnitude    
+ 4) 3.2126     1       #     R_e              [Pixels]
+ 5) 3.7194       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.3484       1       # axis ratio (b/a)   
+10) -44.9999       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 61.45350000000002  18.557299999999998  1 1    # position x, y        [pixel]
+ 3) 22.1232      1       # total magnitude    
+ 4) 3.5542     1       #     R_e              [Pixels]
+ 5) 2.2667       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.5283       1       # axis ratio (b/a)   
+10) 86.16       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 43.939099999999996  14.60820000000001  1 1    # position x, y        [pixel]
+ 3) 23.0361      1       # total magnitude    
+ 4) 1.0929     1       #     R_e              [Pixels]
+ 5) 2.8321       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.07       1       # axis ratio (b/a)   
+10) -88.6152       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 47.26249999999999  13.361799999999988  1 1    # position x, y        [pixel]
+ 3) 22.8471      1       # total magnitude    
+ 4) 2.1887     1       #     R_e              [Pixels]
+ 5) 8.0       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.3771       1       # axis ratio (b/a)   
+10) -0.8333       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 34.76990000000001  31.768200000000007  1 1    # position x, y        [pixel]
+ 3) 21.5142      1       # total magnitude    
+ 4) 8.4717     1       #     R_e              [Pixels]
+ 5) 1.8634       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.6571       1       # axis ratio (b/a)   
+10) 4.7804       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 35.20439999999999  24.539500000000004  1 1    # position x, y        [pixel]
+ 3) 22.1295      1       # total magnitude    
+ 4) 2.2347     1       #     R_e              [Pixels]
+ 5) 2.6912       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.07       1       # axis ratio (b/a)   
+10) 51.7303       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 36.25980000000001  25.0009  1 1    # position x, y        [pixel]
+ 3) 21.9613      1       # total magnitude    
+ 4) 0.7772     1       #     R_e              [Pixels]
+ 5) 3.9406       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.07       1       # axis ratio (b/a)   
+10) 74.3119       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 46.861699999999985  23.97030000000001  1 1    # position x, y        [pixel]
+ 3) 21.662      1       # total magnitude    
+ 4) 1.8702     1       #     R_e              [Pixels]
+ 5) 4.4452       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.8163       1       # axis ratio (b/a)   
+10) -66.1726       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 46.226200000000006  24.337400000000002  1 1    # position x, y        [pixel]
+ 3) 21.6734      1       # total magnitude    
+ 4) 1.8249     1       #     R_e              [Pixels]
+ 5) 2.1503       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.07       1       # axis ratio (b/a)   
+10) -89.7055       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic             # Object type
+ 1) 39.308899999999994  24.9358  1 1    # position x, y        [pixel]
+ 3) 21.8178      1       # total magnitude    
+ 4) 2.8347     1       #     R_e              [Pixels]
+ 5) 0.5019       1       # Sersic exponent (deVauc=4, expdisk=1)  
+ 9) 0.07       1       # axis ratio (b/a)   
+10) 75.3361       1       # position angle (PA)  [Degrees: Up=0, Left=90]
+ Z) 0                  #  Skip this model in output image?  (yes=1, no=0)
+
+0) sky                    #  Component type
+1) -0.2289        1          #  Sky background at center of fitting region [ADUs]
+2) 0.000e+00      0       #  dsky/dx (sky gradient in x)     [ADUs/pix]
+3) 0.000e+00      0       #  dsky/dy (sky gradient in y)     [ADUs/pix]
+Z) 1                      #  Skip this model in output image?  (yes=1, no=0)
+================================================================================
