@@ -40,8 +40,8 @@ def slice_sky(iniconf):
 
     data_dir = iniconf['core info']['data_dir']
     output_dir = iniconf['core info']['output_dir']
-    temp_dir = iniconf['core info']['temp_dir']
-
+    sky_dir = iniconf['core info']['sky_dir']
+   
     org_fits = data_dir + "/" + iniconf['uncertainty calc']['org_fits']
     galfit_output_fits = data_dir + "/" + iniconf['core info']['galfit_output_fits']
     contamination_threshold = iniconf['uncertainty calc']['contaminant_frac'])
@@ -127,7 +127,7 @@ def slice_sky(iniconf):
         
         new_sky = ref_data[b:b+cutout_size_y,a:a+cutout_size_x]
         final_mock = new_sky + model_slice 
-        temp_name = temp_dir + "/" + "new_skycut_%d.fits"%i
+        temp_name = sk_dir + "/" + "new_skycut_%d.fits"%i
 
         #save this new fits file 
         # hdu = fits.PrimaryHDU(final_mock)
