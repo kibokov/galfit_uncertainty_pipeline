@@ -17,6 +17,7 @@ import numpy as np
 from astropy.stats import sigma_clip
 from astropy.io import fits
 import random
+from smoother import maskBrightSource
 
 def print_stage(line2print, ch='-'):
     '''
@@ -125,7 +126,10 @@ def slice_sky(iniconf):
     ## extract slices, add galfit model to each slice
     for i, [a,b] in enumerate(joint):
         
-        new_sky = ref_data[a:a+cutout_size_x,b:b+cutout_size_y]
+        new_sky_v1 = ref_data[a:a+cutout_size_x,b:b+cutout_size_y]
+        
+        new_sky = maskBrightSource(new_sky_v1) ### run code for interpolating brighter sources
+      
         final_mock = new_sky + model_slice 
         temp_name = sky_dir + "/" + "new_skycut_%d.fits"%i
 
