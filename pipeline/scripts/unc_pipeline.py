@@ -9,6 +9,7 @@ from gen_skys import bootstrap_sky
 from compute_unc import compute_unc
 from galshift import galshift
 import concurrent.futures
+from slice_images import slice_sky
 
 def print_stage(line2print, ch='-'):
     '''
@@ -87,7 +88,8 @@ def unc_pipeline(iniconf):
 
     ###########
     #run the new sky cutout generation script and generate new cutouts 
-    bootstrap_sky(iniconf)
+    # bootstrap_sky(iniconf)
+    slice_sky(iniconf)
 
     print_stage("Bootstrapped skies have been generated")
 

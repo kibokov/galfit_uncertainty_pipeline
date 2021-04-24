@@ -24,7 +24,7 @@ def print_stage(line2print, ch='-'):
 
 def compute_unc(iniconf):
 
-    temp_dir = iniconf['core info']['temp_dir']
+    sky_dir = iniconf['core info']['sky_dir']
     data_dir = iniconf['core info']['data_dir']
     output_dir = iniconf['core info']['output_dir']
     comp_ident = data_dir + "/" + iniconf['uncertainty calc']['comp_ident']
@@ -32,7 +32,7 @@ def compute_unc(iniconf):
     niter = int(iniconf['uncertainty calc']['niter'])
     galfit_output_fits = data_dir + "/" + iniconf['core info']['galfit_output_fits']
 
-    all_sky_cuts = glob.glob(temp_dir + "/" + "*_output.fits")
+    all_sky_cuts = glob.glob(sky_dir + "/" + "*_output.fits")
     
     g = GalfitResults(galfit_output_fits)
     mag_zpt = float(g.input_magzpt)

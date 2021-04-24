@@ -3,8 +3,7 @@ import numpy as np
 import os
 from configparser import ConfigParser, ExtendedInterpolation
 import sys
-sys.path.insert(1, 'scripts/')
-from unc_pipeline import unc_pipeline
+
 
 def argument_parser():
     '''
@@ -46,11 +45,14 @@ def read_config_file(config_file=None):
 
 if __name__ == '__main__': 
 
+
     # read in command line arguments
     args = argument_parser().parse_args()
     # read parameters and information from the run config file 
     iniconf = read_config_file(config_file=args.ini)
-
+    scripts_dir = iniconf['core info']['scripts_dir']
+    sys.path.insert(1,scripts_dir)
+    from unc_pipeline import unc_pipeline
 
     #run the uncertainty pipeline
     unc_pipeline(iniconf)

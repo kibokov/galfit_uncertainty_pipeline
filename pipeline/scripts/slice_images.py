@@ -44,8 +44,8 @@ def slice_sky(iniconf):
    
     org_fits = data_dir + "/" + iniconf['uncertainty calc']['org_fits']
     galfit_output_fits = data_dir + "/" + iniconf['core info']['galfit_output_fits']
-    contamination_threshold = iniconf['uncertainty calc']['contaminant_frac'])
-    overlap_frac_max = iniconf['uncertainty calc']['max_overlap'])
+    contamination_threshold = float(iniconf['uncertainty calc']['contaminant_frac'])
+    overlap_frac_max = float(iniconf['uncertainty calc']['max_overlap'])
 
     if (contamination_threshold > .05) | (contamination_threshold <= 0) | (overlap_frac_max > .75) | (overlap_frac_max < 0):
         raise ValueError('Invalid Sky Slicing Parameters (contaminant threshold or overlap fraction')
@@ -92,7 +92,7 @@ def slice_sky(iniconf):
             if frame_sum < percentage_cut:
                 best_frames.append([xposition,yposition])
                 sums.append(frame_sum)
-
+    best_frames = np.array(best_frames)
     ### sort the frames by their quality, clean up a bit 
     revised_best_frames_x = best_frames[:,0][np.argsort(sums)]
     revised_best_frames_y = best_frames[:,1][np.argsort(sums)]
@@ -123,11 +123,11 @@ def slice_sky(iniconf):
     joint = np.asarray([keepx,keepy]).T
 
     ## extract slices, add galfit model to each slice
-    for i, [a,b] in enumerate(join):
+    for i, [a,b] in enumerate(joint):
         
-        new_sky = ref_data[b:b+cutout_size_y,a:a+cutout_size_x]
+        new_sky = ref_data[a:a+cutout_size_x,b:b+cutout_size_y]
         final_mock = new_sky + model_slice 
-        temp_name = sk_dir + "/" + "new_skycut_%d.fits"%i
+        temp_name = sky_dir + "/" + "new_skycut_%d.fits"%i
 
         #save this new fits file 
         # hdu = fits.PrimaryHDU(final_mock)
@@ -139,12 +139,13 @@ def slice_sky(iniconf):
     
 
     if plot_sky == "True":
+        norm = ImageNormalize(ref_data, interval=ZScaleInterval(),stretch=LinearStretch())
         img_save = output_dir + "/" + "skyCutouts.png"
-        fig = plt.figure(figsize = (8,8)
+        fig,ax = plt.subplots(1,1,figsize = (8,8))
         ax = plt.gca()
-        ax.imshow(ref_data, origin='lower', cmap='gray')
+        ax.imshow(ref_data, origin='lower', cmap='gray',norm=norm)
         for [a,b] in joint:
-            rect = patches.Rectangle((a,b), cutout_size_x, cutout_size_y, linewidth= 2,alpha = .11 ,edgecolor='r', facecolor='none')
+            rect = patches.Rectangle((a,b), cutout_size_x, cutout_size_y, linewidth= 2,alpha = 1 ,edgecolor='r', facecolor='none')
             ax.add_patch(rect)
         plt.savefig(img_save)
         print_stage("Sky Cutout Layout Available here : %s"%img_save,ch = "-")
