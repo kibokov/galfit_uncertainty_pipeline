@@ -6,7 +6,7 @@ The pipeline that calculates magnitude uncertaintines and model region file from
 
 ## Directory Structure 
 
-The ```data``` direcotory will contain all files used to run the pipeline. The ```outputs``` directory contains all pipeline outputs (eg. the region file, magnitude outputs txt etc.). The ```scripts``` directory contains all the pipeline code. The ```sky_files directory``` is where all the "new sky cutouts + galfit model" fits file are stored (along with their corresponding .gal file). GALFIT is then run on these fits files in ```sky_files``` directory to then compute the uncertainity. 
+The ```data``` direcotory will contain all files used to run the pipeline. The ```outputs``` directory contains all pipeline outputs (eg. the region file, magnitude outputs txt etc.). The ```scripts``` directory contains all the pipeline code. The ```sky_files``` directory is where all the "new sky cutouts + galfit model" fits file are stored (along with their corresponding .gal file). GALFIT is then run on these fits files in ```sky_files``` directory to then compute the uncertainity. 
 
 The ```run_unc.py``` is the python script that will run the entire pipeline. The ```galfit_pipeline.ini``` is the ini file that contains all information for pipeline. More detailed comments about what each parameter in the ini file means are given in the file itself
 
