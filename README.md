@@ -2,6 +2,8 @@
 
 The pipeline that calculates magnitude uncertaintines and model region file from the GALFIT model. This code was built by Viraj Manwadkar and Will Cerny (Field Course, Winter-Spring 2021); we owe thanks to Ezra Sukay and Kaiya Merz for writing the original GalFit uncertainty code upon which this version is loosely based.
 
+In particular, this new version implements an automated algorithm for selection of blank regions of sky (rather than manual, as was the case before for), and then 
+
 ## Dependencies
 This code will require a number of standard python packages, including:
 * Standard utilities: numpy, matplotlib
@@ -42,7 +44,10 @@ Broadly speaking, the goal of the pipeline is to derive systematic modelling unc
 In more detail, the code to calculate uncertainties (run through the main run_unc_pipeline, but stored within scripts/slice_sky.py) works as follows:
 
 1. Generate a mask of 3-sigma bright sources within your .fits image frame for a given filter band (eg, one of g,r,z for DECaLS)
-2. Find regions of your image frame where the least number of pixels are covered by the mask (ie, least number of bright sources). Each region is the same size as the GalFit modelling region you specify in the .ini configuration file. Because the number of blank regions is often limited 
+2. Find regions of your image frame where the least number of pixels are covered by the mask (ie, least number of bright sources). Each region is the same size as the GalFit modelling region you specify in the .ini configuration file. The user can set a threshold in the .ini file for what percentage of each region can be occupied by a bright source. We find that setting this as 1% or .05% works well.  Because the number of blank regions is often limited by space on the frame, we allow for some overlap, set by the max_overlap parameter in the .ini file. For illustration, setting this parameter to .75 means 75% overlap is allowed. This type of change dramatically changes the number of regions that the algorithm will find, so its a compromise between (a) wanting to reduce overlap so each blank region is more statistically independent and (b) needing enough blank regions to ultimately get a good distribution of magnitudes 
+3. For each identified blank region, create a new mask identifying 3-sigma bright pixels *in that region*. Mask these as np.nan, then run astropy's 2DGaussianKernel to interpolate these gaps with the local sky background. We run this twice, once with a larger kernel, and once with a smaller kernel, in hopes of capturing bright sources on these scales. These can be fine-tuned in slice_sky.py  (but not yet in the config file)
+4. Add the best-
+5. Re-run galfit on each of the newly-interpolated 
 
 ## Notes
 
