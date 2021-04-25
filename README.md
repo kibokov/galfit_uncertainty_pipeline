@@ -2,7 +2,7 @@
 
 The pipeline that calculates magnitude uncertaintines and model region file from the GALFIT model. This code was built by Viraj Manwadkar and Will Cerny (Field Course, Winter-Spring 2021); we owe thanks to Ezra Sukay and Kaiya Merz for writing the original GalFit uncertainty code upon which this version is loosely based.
 
-In particular, this new version implements an automated algorithm for selection of blank regions of sky (rather than manual, as was the case before for), and then 
+In particular, this new version implements an automated algorithm for selection of nearly-blank regions of sky (rather than manual, as was the case before for), and then runs a 2D Gaussian Kernel for interpolation of any lingering bright sources (of which there are very few) with noise, so as to avoid these sources biasing the GalFit models.
 
 ## Dependencies
 This code will require a number of standard python packages, including:
