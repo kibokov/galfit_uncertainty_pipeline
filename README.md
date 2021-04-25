@@ -20,7 +20,7 @@ These are the instructions to setup up the pipeline.
 ```
 > git clone https://github.com/kibokov/galfit_uncertainty_pipeline.git
 ```
-2. In the ```pipeline``` directory, open the ini file (file with extension ```.ini```) and change the **pipeline_dir**. This will be the path pointing to your ```pipeline``` directory in the cloned repositroy.
+2. In the ```pipeline``` directory, open the ini file (file with extension ```.ini```) and change the *pipeline_dir*. This will be the path pointing to your ```pipeline``` directory in the cloned repositroy.
  
 ## Directory Structure 
 
@@ -30,7 +30,7 @@ The ```run_unc.py``` is the python script that will run the entire pipeline. The
 
 ## Running the Region File Pipeline
 
-1. Make sure the **pipeline_dir** in ```galfit_pipeline.ini```  is the correct path. Make sure all the correct info is filled in ```[core info]``` and ```[reg creation]``` sections of ini file.  
+1. Make sure the *pipeline_dir* in ```galfit_pipeline.ini```  is the correct path. Make sure all the correct info is filled in ```[core info]``` and ```[reg creation]``` sections of ini file.  
 
 2. Run the following command inside the ```pipeline``` directory,
 ```
@@ -42,17 +42,17 @@ The ```run_unc.py``` is the python script that will run the entire pipeline. The
 
 ## Running the Uncertainity Pipeline
 
-1. Make sure the **pipeline_dir** in ```galfit_pipeline.ini```  is the correct path. Make sure all the correct info is filled in ```[core info]``` and ```[uncertainty calc]``` sections of ini file.  
+1. Make sure the *pipeline_dir* in ```galfit_pipeline.ini```  is the correct path. Make sure all the correct info is filled in ```[core info]``` and ```[uncertainty calc]``` sections of ini file.  
 
 2. In the ```data``` directory, add your Multi-Extension Cube fits that GalFit outputs, the PSF fits (the slice), the constraint file, the original data fits, and a text file (called comp_ident) that contains the mapping between GalFit component number and object number in the field. After this, you will have to make the relevant changes in the ini file so as to provide the corrrect file names. 
 
-3. In ini file, choose the correct method for background sky generation. We will be using the **interpolation** method. Note that a separate method called **bootstrap** has also been implemented, but we will not be using it for uncertainty calculations and was implemented for experimention purposes.
+3. In ini file, choose the correct method for background sky generation. We will be using the *interpolation* method. Note that a separate method called *bootstrap* has also been implemented, but we will not be using it for uncertainty calculations and was implemented for experimention purposes.
 
 4. Run the following command inside the ```pipeline``` directory to run the pipeline.
 ```
 > python3 run_unc.py -ini galfit_pipeline.ini
 ```
-5. The ```output_mag_file``` file will be created in the ```outputs``` directory. This file has rows for each sky generated and columns for each **object** (not component) in the field. Based on the ```comp_ident``` file, this pipeline combines the flux of the GalFit components of an object and returns the total magnitude. Refer to Note #4 for more on this.
+5. The ```output_mag_file``` file will be created in the ```outputs``` directory. This file has rows for each sky generated and columns for each *object* (not component) in the field. Based on the ```comp_ident``` file, this pipeline combines the flux of the GalFit components of an object and returns the total magnitude. Refer to Note #4 for more on this.
 
 ## Testing this Pipeline
 
@@ -75,7 +75,7 @@ In more detail, the code to calculate uncertainties (run through the main run_un
 
 Some important notes 
 
-1. To be explicitly clear, **you should only ever have to run one .py file, called run_unc_pipeline.py. Trying to run individual files in the scripts folder will not do anything, by design.**
+1. To be explicitly clear, *you should only ever have to run one of these two python files: ```run_unc.py``` or ```create_reg.py``` file. Trying to run individual files in the ```scripts``` folder will not do anything, by design.*
 2. If you choose the option ```print_gal_log = False```, all the GalFit output will be redirected to the ```run_log.txt``` file. After a few pipeline runs, that file will tend to become quite large. So do delete that txt file once in a while so as to make sure it does not get very large. 
 
 3. You will notice that the outputs directory contains some other files as well. The ```skyCutouts.png``` file shows the image of all the sky regions the algorithm detects to interpolate. These are skies that have very little bright object contamination. 
@@ -84,7 +84,7 @@ Some important notes
 ```python
 tot_flux = 0 
 mag_zpt = #zero point magnitude. 
-for component_i in componet:
+for component_i in components:
     mag = #read the magnitude of component_i from header
     flux = 10**(-0.4*(mag - mag_zpt))
     tot_flux += flux
