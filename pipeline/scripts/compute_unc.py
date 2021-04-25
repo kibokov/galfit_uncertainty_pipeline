@@ -5,7 +5,7 @@ and stores the distribution of magnitudes of each modelled component
 import glob
 import numpy as np 
 from astropy.io import fits
-from create_reg import GalfitComponent, GalfitResults
+from generate_reg import GalfitComponent, GalfitResults
 
 def print_stage(line2print, ch='-'):
     '''
@@ -29,7 +29,6 @@ def compute_unc(iniconf):
     output_dir = iniconf['core info']['output_dir']
     comp_ident = data_dir + "/" + iniconf['uncertainty calc']['comp_ident']
     output_mag_file = output_dir + "/" + iniconf['uncertainty calc']['output_mag_file']
-    niter = int(iniconf['uncertainty calc']['niter'])
     galfit_output_fits = data_dir + "/" + iniconf['core info']['galfit_output_fits']
 
     all_sky_cuts = glob.glob(sky_dir + "/" + "*_output.fits")

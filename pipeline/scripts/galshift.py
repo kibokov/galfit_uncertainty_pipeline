@@ -3,7 +3,7 @@ Script that will create a new galfit parameters file which has shifted the coord
 The new origin will be the bottom left corner of cutout box. 
 '''
 
-from create_reg import GalfitComponent, GalfitResults
+from generate_reg import GalfitComponent, GalfitResults
 
 galfit_feedme = '''================================================================================
 # IMAGE and GALFIT CONTROL PARAMETERS

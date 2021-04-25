@@ -225,12 +225,7 @@ def coord_transform(old_c,shift_c):
 	return str(float(old_c) - float(shift_c))
 
 
-if __name__ == '__main__': 
-
-    # read in command line arguments
-    args = argument_parser().parse_args()
-    # read parameters and information from the run config file 
-    iniconf = read_config_file(config_file=args.ini)
+def generate_reg(iniconf):
 
     #read the galfit output file 
     path =  iniconf['core info']['galfit_output_fits']  
@@ -300,3 +295,8 @@ if __name__ == '__main__':
                         f.write('circle(%s, %s, 3) # color=red width=2 text={%s}\n'%(comp_x,comp_y, comp.component_number))
                     else:
                         f.write('ellipse(%s, %s, %s, %s, %s) # width = 2 text = {%s}\n' %(comp_x,comp_y, comp.ar*comp.re, comp.re, comp.pa, comp.component_number))
+
+    print_stage('The region file has been generated : %s'%output_file,ch = "-")
+
+
+    return
