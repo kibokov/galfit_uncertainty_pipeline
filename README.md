@@ -1,6 +1,6 @@
 # GALFIT Uncertainty and Reg File Pipeline
 
-The pipeline that calculates magnitude uncertaintines and model region file from the GALFIT model.
+The pipeline that calculates magnitude uncertaintines and model region file from the GALFIT model. This code was built by Viraj Manwadkar and Will Cerny (Field Course, Winter-Spring 2021); we owe thanks to Ezra Sukay and Kaiya Merz for writing the original GalFit uncertainty code upon which this version is loosely based.
 
 ## Dependencies
 This code will require a number of standard python packages, including:
