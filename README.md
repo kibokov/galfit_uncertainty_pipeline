@@ -48,7 +48,7 @@ In more detail, the code to calculate uncertainties (run through the main run_un
 3. For each identified blank region, create a new mask identifying 3-sigma bright pixels *in that region*. Mask these as np.nan, then run astropy's 2DGaussianKernel to interpolate these gaps with the local sky background. We run this twice, once with a larger kernel, and once with a smaller kernel, in hopes of capturing bright sources on these scales. These can be fine-tuned in slice_images.py  (but not yet in the config file)
 4. Add the best-fit GalFit model to the (interpolated) slices of sky from Step 2-3. 
 5. Re-run galfit on each of these slices.
-6. Calculate magnitudes from the GalFit results for each object (NOT each component; this is what 
+6. Calculate magnitudes from the GalFit results for each physical object (NOT each component; this is what the comp_ident file is for)
 
 ## Notes
 
