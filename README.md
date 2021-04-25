@@ -8,7 +8,7 @@ This code will require a number of standard python packages, including:
 * .fits file handling: astropy, astropy.io
 * Shell/Command Line handling: re, shutil, os, configparser, glob
 
-These can all be installed with a standard <code> pip install PACKAGE </code>
+These can all be installed with a standard <code> pip install PACKAGE </code>, although we note that many of these come with standard Anaconda distributions
 
 ## Directory Structure 
 
