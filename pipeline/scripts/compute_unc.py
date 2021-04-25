@@ -57,16 +57,16 @@ def compute_unc(iniconf):
         model_header = img[2].header
         for on in range(1,obj_num+1): #tot_obj_num   = [1,2,3,4, ...]
             cn = comp_num[comp_obj_id == on]
-            temp_flux = 0
+            tot_flux = 0
             for cni in cn:
                 magi = model_header['%d_MAG'%cni]
                 mag = float(magi.split(" +/-")[0])
                 #convert this mag to flux and append to list to be summed.
                 flux = 10**(-0.4*(mag - mag_zpt))
-                temp_flux += flux
+                tot_flux += flux
 
             #convert the total object flux back to magnitudes
-            final_mag = mag_zpt - 2.5*np.log10(temp_flux)
+            final_mag = mag_zpt - 2.5*np.log10(tot_flux)
             all_magnitudes[i,on-1] = final_mag
 
     #check that all_magnitudes array is populated 

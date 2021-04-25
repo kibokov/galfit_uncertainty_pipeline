@@ -4,8 +4,6 @@ The pipeline that calculates magnitude uncertaintines and model region file from
 
 In particular, this new version implements an automated algorithm for selection of nearly-blank regions of sky (rather than manual, as was the case before for), and then runs a 2D Gaussian Kernel for interpolation of any lingering bright sources (of which there are very few) with noise, so as to avoid these sources biasing the GalFit models. We also allow greater control over the entire process by implementing a main script + config.ini framework, which means that you can tweak many parameters about this process without editing any subfiles. There are also a few bonus features, like parallelization of running multiple GalFit models simultaneously.
 
-[[_TOC_]]
-
 ## Dependencies
 This code will require a number of standard python packages, including:
 * Standard utilities: numpy, matplotlib
@@ -54,7 +52,7 @@ The ```run_unc.py``` is the python script that will run the entire pipeline. The
 ```
 > python3 run_unc.py -ini galfit_pipeline.ini
 ```
-5. The ```output_mag_file``` file will be created in the ```outputs``` directory. This file has rows for each sky generated and columns for each **object** (not component) in the field. Based on the ```comp_ident``` file, this pipeline combines the flux of the GalFit components of an object and returns the total magnitude. Refer to notes for more on this.
+5. The ```output_mag_file``` file will be created in the ```outputs``` directory. This file has rows for each sky generated and columns for each **object** (not component) in the field. Based on the ```comp_ident``` file, this pipeline combines the flux of the GalFit components of an object and returns the total magnitude. Refer to Note #4 for more on this.
 
 ## Testing this Pipeline
 
@@ -82,12 +80,17 @@ Some important notes
 
 3. You will notice that the outputs directory contains some other files as well. The ```skyCutouts.png``` file shows the image of all the sky regions the algorithm detects to interpolate. These are skies that have very little bright object contamination. 
 
-4. The way total magnitude of an object is computed is as follows 
+4. The way total magnitude of an object is computed is as follows. 
 ```python
-def function():
-    #indenting works just fine in the fenced code block
-    s = "Python code"
-    print s
+tot_flux = 0 
+mag_zpt = #zero point magnitude. 
+for component_i in componet:
+    mag = #read the magnitude of component_i from header
+    flux = 10**(-0.4*(mag - mag_zpt))
+    tot_flux += flux
+    
+final_mag = mag_zpt - 2.5*np.log10(tot_flux)
 ```
+
 
 
