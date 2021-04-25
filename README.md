@@ -5,10 +5,10 @@ The pipeline that calculates magnitude uncertaintines and model region file from
 ## Dependencies
 This code will require a number of standard python packages, including:
 * Standard utilities: numpy, matplotlib
-* .fits file handling: astropy.io
-* Shell/Command Line handling: re, shutil, os, 
-* 
-* 
+* .fits file handling: astropy, astropy.io
+* Shell/Command Line handling: re, shutil, os, configparser, glob
+
+These can all be installed with a standard <code> pip install PACKAGE </code>
 
 ## Directory Structure 
 
