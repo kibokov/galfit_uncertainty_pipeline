@@ -54,7 +54,7 @@ In more detail, the code to calculate uncertainties (run through the main run_un
 
 Some important notes 
 
-1. To be explicitly clear, **you should only ever have to run one .py file. Trying to run individual files in the scripts folder will not do anything.**
+1. To be explicitly clear, **you should only ever have to run one .py file, called run_unc_pipeline.py. Trying to run individual files in the scripts folder will not do anything, by design.**
 2. If you choose the option ```print_gal_log = False```, all the GALFIT output will be redirected to the ```run_log.txt``` file. After a few pipeline runs, that file will tend to become quite large. So do delete that txt file once in a while so as to make sure it does not get very large. 
 
 2. You will notice that the outputs directory contains some other files as well. The ```skyCutouts.png``` file shows the image of all the sky regions the algorithm detects to interpolate. These are skies that have very little bright object contamination. 
