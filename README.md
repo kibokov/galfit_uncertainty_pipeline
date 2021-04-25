@@ -18,7 +18,7 @@ The ```run_unc.py``` is the python script that will run the entire pipeline. The
 
 ## Running the Pipeline
 
-The .ini file in the pipeline directory contains all the information neded to run this pipeline. You will need to make the relevant changes in the .ini file when running the pipeline on your machine. The 
+The .ini file in the pipeline directory contains all the information neded to run this pipeline. You will need to make the relevant changes in the .ini file when running the pipeline on your machine. 
 
 More detailed steps are listed below:
 
@@ -35,11 +35,14 @@ More detailed steps are listed below:
 
 There is some test data sitting in the pipeline already. Once you clone this respository, you can see if this pipeline is working by running the above command. 
 
-## Uncertainty Calculation
+## Premise of the Uncertainty Calculation
 
-The way we calculate uncertainties ..... Will you can fill this in
+Broadly speaking, the goal of the pipeline is to derive systematic modelling uncertainties from GalFit by taking your best-fit Galfit model and "injecting" it into (nearly-) blank regions of sky and re-running Galfit to see whether the difference in background causes a difference in the resulting magnitudes. This produces a distribution of magnitudes for each component from which we can use the standard deviation as one part of the modelling systematic uncertainty. 
 
-explain the contaminant fraction and max_overlap parameters 
+In more detail, the code to calculate uncertainties (run through the main run_unc_pipeline, but stored within scripts/slice_sky.py) works as follows:
+
+1. Generate a mask of 3-sigma bright sources within your .fits image frame for a given filter band (eg, one of g,r,z for DECaLS)
+2. Find regions of your image frame where the least number of pixels are covered by the mask (ie, least number of bright sources). Each region is the same size as the GalFit modelling region you specify in the .ini configuration file. Because the number of blank regions is often limited 
 
 ## Notes
 
