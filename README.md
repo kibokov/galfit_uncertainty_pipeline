@@ -10,28 +10,49 @@ This code will require a number of standard python packages, including:
 * .fits file handling: astropy, astropy.io
 * Shell/Command Line handling: re, shutil, os, configparser, glob
 
-These can all be installed with a standard <code> pip install PACKAGE </code>, although we note that many of these come with standard Anaconda distributions
+These can all be installed with a standard <code> pip install PACKAGE</code>, although we note that many of these come with standard Anaconda distributions.
 
+## Setting up the Pipeline
+
+These are the instructions to setup up the pipeline.
+
+1. Clone the repository onto your local machine by running below command in the directory of choice
+```
+> git clone https://github.com/kibokov/galfit_uncertainty_pipeline.git
+```
+2. In the ```pipeline``` directory, open the ini file (file with extension ```.ini```) and change the **pipeline_dir**. This will be the path pointing to your ```pipeline``` directory in the cloned repositroy.
+ 
 ## Directory Structure 
 
-The ```data``` directory will contain all files used to run the pipeline. The ```outputs``` directory contains all pipeline outputs (eg. the region file, magnitude outputs txt etc.). The ```scripts``` directory contains all the pipeline code. The ```sky_files``` directory is where all the "new sky cutouts + galfit model" fits file are stored (along with their corresponding .gal file). GALFIT is then run on these fits files in ```sky_files``` directory to then compute the uncertainity. 
+The ```data``` directory will contain all files used to run the pipeline. The ```outputs``` directory contains all pipeline outputs (eg. the region file, magnitude outputs txt etc.). The ```scripts``` directory contains all the pipeline code. The ```sky_files``` directory is where all the "new sky cutouts + galfit model" fits file are stored (along with their corresponding .gal file). GalFit is then run on these fits files in ```sky_files``` directory to then compute the uncertainity. 
 
 The ```run_unc.py``` is the python script that will run the entire pipeline. The ```galfit_pipeline.ini``` is the ini file that contains all information for pipeline. More detailed comments about what each parameter in the ini file means are given in the file itself
 
-## Running the Pipeline
+## Running the Region File Pipeline
 
-The .ini file in the pipeline directory contains all the information neded to run this pipeline. You will need to make the relevant changes in the .ini file when running the pipeline on your machine. 
+1. Make sure the **pipeline_dir** in ```galfit_pipeline.ini```  is the correct path. Make sure all the correct info is filled in ```[core info]``` and ```[reg creation]``` sections of ini file.  
 
-More detailed steps are listed below:
-
-1. In the data directory, add your Multi-Extension Cube fits that galfit outputs, the PSF fits (the slice), the constraint file, the original data fits, and a text file (called comp_ident) that contains the mapping between GALFIT component number and object number in the field. After this, you will have to make the relevant changes so as to provide the corrrect file names. 
-
-2. In ini file,  choose the correct method for background sky generation. We will be using the **interpolation** method. 
-
-3. Run the following command inside the pipeline directory to run the pipeline.
+2. Run the following command inside the ```pipeline``` directory,
 ```
-> python3 run_unc_pipeline.py -ini galfit_pipeline.ini
+> python3 create_reg.py -ini galfit_pipeline.ini
 ```
+
+3. The region file will be created in the ```outputs``` directory. 
+
+
+## Running the Uncertainity Pipeline
+
+1. Make sure the **pipeline_dir** in ```galfit_pipeline.ini```  is the correct path. Make sure all the correct info is filled in ```[core info]``` and ```[uncertainty calc]``` sections of ini file.  
+
+2. In the ```data``` directory, add your Multi-Extension Cube fits that GalFit outputs, the PSF fits (the slice), the constraint file, the original data fits, and a text file (called comp_ident) that contains the mapping between GalFit component number and object number in the field. After this, you will have to make the relevant changes in the ini file so as to provide the corrrect file names. 
+
+3. In ini file, choose the correct method for background sky generation. We will be using the **interpolation** method. Note that a separate method called **bootstrap** has also been implemented, but we will not be using it for uncertainty calculations and was implemented for experimention purposes.
+
+4. Run the following command inside the ```pipeline``` directory to run the pipeline.
+```
+> python3 run_unc.py -ini galfit_pipeline.ini
+```
+5. The ```output_mag_file``` file will be created in the ```outputs``` directory. This file has rows for each sky generated and columns for each **object** (not component) in the field. Based on the ```comp_ident``` file, this pipeline combines the flux of the GalFit components of an object and returns the total magnitude. Refer to notes for more on this.
 
 ## Testing this Pipeline
 
@@ -55,8 +76,15 @@ In more detail, the code to calculate uncertainties (run through the main run_un
 Some important notes 
 
 1. To be explicitly clear, **you should only ever have to run one .py file, called run_unc_pipeline.py. Trying to run individual files in the scripts folder will not do anything, by design.**
-2. If you choose the option ```print_gal_log = False```, all the GALFIT output will be redirected to the ```run_log.txt``` file. After a few pipeline runs, that file will tend to become quite large. So do delete that txt file once in a while so as to make sure it does not get very large. 
+2. If you choose the option ```print_gal_log = False```, all the GalFit output will be redirected to the ```run_log.txt``` file. After a few pipeline runs, that file will tend to become quite large. So do delete that txt file once in a while so as to make sure it does not get very large. 
 
-2. You will notice that the outputs directory contains some other files as well. The ```skyCutouts.png``` file shows the image of all the sky regions the algorithm detects to interpolate. These are skies that have very little bright object contamination. 
+3. You will notice that the outputs directory contains some other files as well. The ```skyCutouts.png``` file shows the image of all the sky regions the algorithm detects to interpolate. These are skies that have very little bright object contamination. 
 
-3. 
+4. The way total magnitude of an object is computed is as follows 
+```math 
+
+x^2 = \frac{x}{y}
+
+```
+
+
