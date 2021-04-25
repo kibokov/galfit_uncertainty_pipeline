@@ -45,7 +45,8 @@ def compute_unc(iniconf):
     obj_num = np.max(comp_obj_id)
 
     #empty array initialized. This array will be populated with combined object magnitudes
-    all_magnitudes = np.zeros(shape = (niter,obj_num))
+    sky_files_num = len(all_sky_cuts)
+    all_magnitudes = np.zeros(shape = (sky_files_num,obj_num))
 
     if np.min(np.bincount(comp_obj_id)[1:]) == 0:
         raise ValueError("recheck your comp_ident file. Appears that you have misnumbered and missed a number.")
@@ -82,9 +83,6 @@ def compute_unc(iniconf):
 
     
             
-
-
-
 
 
 

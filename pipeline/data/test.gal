@@ -1,12 +1,12 @@
 ================================================================================
 # IMAGE and GALFIT CONTROL PARAMETERS
 A) COOLJ0112-2053_DECaLSz.fits  # <<<<<< file you want to fit
-B) /Users/radioactive/Desktop/galfit_pipeline/pipeline/data/galfit_output_example.fits   # <<<<<< output file name
+B) /Users/radioactive/Desktop/galfit_uncertainty_pipeline/pipeline/data/galfit_output_example.fits   # <<<<<< output file name
 C) none                # Sigma image name (made from data if blank or "none") 
 D) PSF_Z_slice.fits                  # Input PSF image and (optional) diffusion kernel
 E) 1                   # PSF fine sampling factor relative to data 
 F) none                # <<<<<< mask image (0=use, 1=ignore)
-G) /Users/radioactive/Desktop/galfit_pipeline/pipeline/data/cons_ab.txt                    # <<<<<< File with parameter constraints (ASCII file) 
+G) /Users/radioactive/Desktop/galfit_uncertainty_pipeline/pipeline/data/cons_abs.txt                    # <<<<<< File with parameter constraints (ASCII file) 
 H) 1 96 1 78  # <<<<<< region in A) for fit, as x1 x2 y1 y2 
 I) 96 78             # size of the convolution
 J) 31.169              # <<<<<< Magnitude photometric zeropoint * 

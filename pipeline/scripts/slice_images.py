@@ -63,12 +63,10 @@ def slice_sky(iniconf):
     model_fits = fits.open(galfit_output_fits)
     model_slice = model_fits[2].data
     #shape of array is going to be 
-    cutout_size_x = int(all_c[3]) - int(all_c[2]) + 1
-    cutout_size_y = int(all_c[1]) - int(all_c[0]) + 1
+    cutout_size_y = int(all_c[3]) - int(all_c[2]) + 1
+    cutout_size_x = int(all_c[1]) - int(all_c[0]) + 1
 
     
-
-
     #open the fits file, calculate sigma-clipped statistics
     ref_data = fits.open(org_fits)[0].data
     imdim_x = ref_data.shape[0]
@@ -126,7 +124,7 @@ def slice_sky(iniconf):
     ## extract slices, add galfit model to each slice
     for i, [a,b] in enumerate(joint):
         
-        new_sky_v1 = ref_data[a:a+cutout_size_x,b:b+cutout_size_y]
+        new_sky_v1 = ref_data[b:b+cutout_size_y,a:a+cutout_size_x]
         
         new_sky = maskBrightSource(new_sky_v1) ### run code for interpolating brighter sources
       

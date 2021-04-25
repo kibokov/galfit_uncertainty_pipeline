@@ -5,7 +5,7 @@ from configparser import ConfigParser, ExtendedInterpolation
 import numpy as np
 import glob
 from tqdm import tqdm 
-from gen_skys import bootstrap_sky
+from gen_skys import bootstrap_sky, slice_sky
 from compute_unc import compute_unc
 from galshift import galshift
 import concurrent.futures
@@ -66,6 +66,7 @@ def unc_pipeline(iniconf):
     gal_log = iniconf['uncertainty calc']['print_gal_log']
     working_in_cutout = iniconf['core info']['cutout_frame']
     run_parallel = iniconf['uncertainty calc']['run_parallel']
+    method = iniconf['uncertainty calc']['method']
 
 
     #first clean all the files in the temp directory
@@ -88,10 +89,12 @@ def unc_pipeline(iniconf):
 
     ###########
     #run the new sky cutout generation script and generate new cutouts 
-    # bootstrap_sky(iniconf)
-    slice_sky(iniconf)
+    if method == "bootstrap":
+        bootstrap_sky(iniconf)
+    if method == "interpolation":
+        slice_sky(iniconf)
 
-    print_stage("Bootstrapped skies have been generated")
+    print_stage("Skies have been generated")
 
     ###########
 
