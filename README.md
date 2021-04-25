@@ -2,7 +2,8 @@
 
 The pipeline that calculates magnitude uncertaintines and model region file from the GALFIT model.
 
-
+## Dependencies
+This code will require a number of standard python packages, including <code>astropy<code>
 
 ## Directory Structure 
 
