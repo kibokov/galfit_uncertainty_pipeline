@@ -4,6 +4,8 @@ The pipeline that calculates magnitude uncertaintines and model region file from
 
 In particular, this new version implements an automated algorithm for selection of nearly-blank regions of sky (rather than manual, as was the case before for), and then runs a 2D Gaussian Kernel for interpolation of any lingering bright sources (of which there are very few) with noise, so as to avoid these sources biasing the GalFit models. We also allow greater control over the entire process by implementing a main script + config.ini framework, which means that you can tweak many parameters about this process without editing any subfiles. There are also a few bonus features, like parallelization of running multiple GalFit models simultaneously.
 
+[[_TOC_]]
+
 ## Dependencies
 This code will require a number of standard python packages, including:
 * Standard utilities: numpy, matplotlib
@@ -81,10 +83,11 @@ Some important notes
 3. You will notice that the outputs directory contains some other files as well. The ```skyCutouts.png``` file shows the image of all the sky regions the algorithm detects to interpolate. These are skies that have very little bright object contamination. 
 
 4. The way total magnitude of an object is computed is as follows 
-```math 
-
-x^2 = \frac{x}{y}
-
+```python
+def function():
+    #indenting works just fine in the fenced code block
+    s = "Python code"
+    print s
 ```
 
 
