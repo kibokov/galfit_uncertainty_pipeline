@@ -5,6 +5,21 @@ from configparser import ConfigParser, ExtendedInterpolation
 import sys
 
 
+def print_stage(line2print, ch='-'):
+    '''
+    Function that prints lines for organizational purposes in the code outputs.
+
+    Parameters:
+    -----------
+    line2print: str, the message to be printed
+    ch : str, the boundary dividing character of the message
+    '''
+    nl = len(line2print)
+    print(ch*nl)
+    print(line2print)
+    print(ch*nl)
+    print(' ')
+
 def argument_parser():
     '''
     Function that parses the arguments passed while running a script
@@ -14,7 +29,7 @@ def argument_parser():
     '''
     result = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     # path to the config file with parameters and information about the run
-    result.add_argument('-ini', dest='ini', type=str) 
+    result.add_argument('-ini', dest='ini', type=str,default="galfit_pipeline.ini") 
     return result
 
 
@@ -52,6 +67,7 @@ if __name__ == '__main__':
     scripts_dir = iniconf['core info']['scripts_dir']
     sys.path.insert(1,scripts_dir)
     from generate_reg import generate_reg
+    print_stage("The following ini file is being read : " + str(args.ini))
 
     #run the region file generator pipeline
     generate_reg(iniconf)

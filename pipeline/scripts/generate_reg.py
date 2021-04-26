@@ -247,6 +247,10 @@ def generate_reg(iniconf):
 
     final_fits_path = data_dir + "/" + path
 
+    #check if the GalFit model fits exists
+    if not os.path.isfile(final_fits_path):
+        raise ValueError('input GalFit Model file {:s} does not exist!'.format(final_fits_path))
+
     print_stage('This galfit output file is being read : %s'%final_fits_path,ch = "-")
 
     g = GalfitResults(final_fits_path)

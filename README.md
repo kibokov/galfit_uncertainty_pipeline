@@ -34,9 +34,12 @@ The ```run_unc.py``` is the python script that will run the entire pipeline. The
 
 2. Run the following command inside the ```pipeline``` directory,
 ```
-> python3 create_reg.py -ini galfit_pipeline.ini
+> python3 create_reg.py
 ```
-
+The above command by default reads the ```galfit_pipeline.ini``` file. However, in case you change the name or wish to provide a different one, you can specify that through the ini fiag as below
+```
+> python3 create_reg.py -ini new_name.ini
+```
 3. The region file will be created in the ```outputs``` directory. 
 
 
@@ -50,9 +53,13 @@ The ```run_unc.py``` is the python script that will run the entire pipeline. The
 
 4. Run the following command inside the ```pipeline``` directory to run the pipeline.
 ```
-> python3 run_unc.py -ini galfit_pipeline.ini
+> python3 run_unc.py
 ```
-5. The ```output_mag_file``` file will be created in the ```outputs``` directory. This file has rows for each sky generated and columns for each *object* (not component) in the field. Based on the ```comp_ident``` file, this pipeline combines the flux of the GalFit components of an object and returns the total magnitude. Refer to Note #4 for more on this.
+The above command by default reads the ```galfit_pipeline.ini``` file. However, in case you change the name or wish to provide a different one, you can specify that through the ini fiag as below
+```
+> python3 create_reg.py -ini new_name.ini
+```
+5. The ```output_mag_file``` file will be created in the ```outputs``` directory. The first row contains the magntudes of the original GalFit model you made. The following rows are for each sky generated. The columns are for each *object* (not component) in the field. Based on the ```comp_ident``` file, this pipeline combines the flux of the GalFit components of an object and returns the total magnitude. Refer to Note #4 for more on this.
 
 ## Testing this Pipeline
 
@@ -91,6 +98,6 @@ for component_i in components:
     
 final_mag = mag_zpt - 2.5*np.log10(tot_flux)
 ```
-
+5. For some OS, the galfit executable might not be downloading properly while cloning it from github. So a good idea is to replace the galfit executable from the cloned version with the version you already have on your machine. For Mac OS, i do not think this is an issue. However, for Linux this will be an issue.
 
 

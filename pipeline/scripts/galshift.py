@@ -15,7 +15,7 @@ E) 1                   # PSF fine sampling factor relative to data
 F) none                # <<<<<< mask image (0=use, 1=ignore)
 G) %s                    # <<<<<< File with parameter constraints (ASCII file) 
 H) %s %s %s %s  # <<<<<< region in A) for fit, as x1 x2 y1 y2 
-I) 96 78             # size of the convolution
+I) %s %s             # size of the convolution
 J) 31.169              # <<<<<< Magnitude photometric zeropoint * 
 K) 0.200  0.200       # Image scale in arcsec/pix
 O) regular             # Display type (regular, curses, both)
@@ -64,7 +64,7 @@ def coord_transform(old_c,shift_c):
 def galshift(iniconf,working_in_cutout="False"):
     data_dir = iniconf['core info']['data_dir']
     galfit_output_fits = data_dir + "/" + iniconf['core info']['galfit_output_fits']
-    galfit_params = iniconf['uncertainty calc']['galfit_params']
+    galfit_params = "temp.gal"
     galfit_con = data_dir + "/" + iniconf['uncertainty calc']['constraint_file']
 
     g = GalfitResults(galfit_output_fits)
@@ -75,20 +75,28 @@ def galshift(iniconf,working_in_cutout="False"):
         if working_in_cutout == "False":
             new_x1 = str(int(g.box_x1) - int(g.box_x0)+1)
             new_y1 = str(int(g.box_y1) - int(g.box_y0)+1)
-            new_gal.write(galfit_feedme%(g.input_datain, g.galfit_fits_file,g.input_psf, galfit_con ,"1",new_x1,"1",new_y1))
+            #new_x1, new_y1 will also be values for the convolution box size
+            new_gal.write(galfit_feedme%(g.input_datain, g.galfit_fits_file,g.input_psf, galfit_con ,"1",new_x1,"1",new_y1,new_x1, new_y1))
         else:
-            new_gal.write(galfit_feedme%(g.input_datain, g.galfit_fits_file,g.input_psf, galfit_con ,g.box_x0,g.box_x1,g.box_y0,g.box_y1))
+            conv_x = int(g.box_x1) - int(g.box_x0) + 1
+            conv_y = int(g.box_y1) - int(g.box_y0) + 1
+            new_gal.write(galfit_feedme%(g.input_datain, g.galfit_fits_file,g.input_psf, galfit_con ,g.box_x0,g.box_x1,g.box_y0,g.box_y1,conv_x,conv_y))
 
         for key in g.__dict__.keys():
             if 'component_' in key:
                 comp = getattr(g, key)
                 if comp.component_type != 'sky':
+                    if float(comp.mag) > 25:
+                        comp_mag = 25
+                    else:
+                        comp_mag = comp.mag
+
                     if working_in_cutout == "False":
                         new_x = coord_transform(comp.xc,int(g.box_x0)-1)
                         new_y = coord_transform(comp.yc,int(g.box_y0)-1)
-                        new_gal.write(galfit_comp%(comp.component_type,new_x,new_y,comp.mag,comp.re,comp.n,comp.ar,comp.pa   ) )
+                        new_gal.write(galfit_comp%(comp.component_type,new_x,new_y,comp_mag,comp.re,comp.n,comp.ar,comp.pa   ) )
                     else:
-                        new_gal.write(galfit_comp%(comp.component_type,comp.xc,comp.yc,comp.mag,comp.re,comp.n,comp.ar,comp.pa   ) )
+                        new_gal.write(galfit_comp%(comp.component_type,comp.xc,comp.yc,comp_mag,comp.re,comp.n,comp.ar,comp.pa   ) )
                         
                 else:
                     new_gal.write(sky_comp%(comp.sky))

@@ -67,6 +67,16 @@ def unc_pipeline(iniconf):
     working_in_cutout = iniconf['core info']['cutout_frame']
     run_parallel = iniconf['uncertainty calc']['run_parallel']
     method = iniconf['uncertainty calc']['method']
+    galfit_output_fits = data_dir + "/" + iniconf['core info']['galfit_output_fits']
+
+
+    #first check if all the relevant files exist
+    if not os.path.isfile(data_dir + "/" + psf_fits):
+        raise ValueError('input PSF file {:s} does not exist!'.format(data_dir + "/" + psf_fits))
+    if not os.path.isfile(galfit_output_fits):
+        raise ValueError('input GalFit Model file {:s} does not exist!'.format(galfit_output_fits))
+    if not os.path.isfile(con_file) and con_file.replace(data_dir + "/","") != "none":
+        raise ValueError('input constraint file {:s} does not exist!'.format(con_file))
 
 
     #first clean all the files in the temp directory
@@ -80,10 +90,7 @@ def unc_pipeline(iniconf):
 
     #make a .gal using the output fits 
     galshift(iniconf,working_in_cutout=working_in_cutout)
-    galfit_params = data_dir + "/" + iniconf['uncertainty calc']['galfit_params']
-
-    print_stage("Galfit file being read : %s"%galfit_params )
-
+    galfit_params = data_dir + "/" + "temp.gal"
 
     #############################
 
@@ -111,8 +118,11 @@ def unc_pipeline(iniconf):
 
         temp_lines = all_gal_lines
         new_gal = fi.replace(".fits",".gal")
-
-        con_file_new = con_file.replace(pipeline_dir+"/","")
+        
+        if con_file == "none":
+            con_file_new = "none"
+        else:
+            con_file_new = con_file.replace(pipeline_dir+"/","")
 
         new_g = open(new_gal,"w+")
         #the paths here need to relative paths wrt to galfit script
