@@ -36,11 +36,9 @@ def run_in_parallel(func, iter_input):
     -----------
         func: function, the function to be parallelized
         iter_input: list, the list of function inputs to loop over
-
     Returns:
     -----------
         results: list, entire function output
-
     '''
     print(len(iter_input))
     with concurrent.futures.ProcessPoolExecutor() as executor:
@@ -48,8 +46,14 @@ def run_in_parallel(func, iter_input):
     return results
 
 
-def run_gal(gpi):
-    os.system("./galfit " + gpi + " >> run_log.txt")
+# def run_gal(gpi,run_on_lipwig = False):
+def run_gal(input_stuff=None):
+    gpi = input_stuff['gpi']
+    run_on_lipwig = input_stuff['run_on_lipwig']
+    if run_on_lipwig == "False":
+        os.system("./galfit " + gpi + " >> run_log.txt")
+    if run_on_lipwig == "True":
+        os.system("galfit " + gpi + " >> run_log.txt")
     return 
 
 
@@ -107,11 +111,8 @@ def unc_pipeline(iniconf):
 
     file_names = glob.glob(sky_dir + "/" + "*.fits")
 
-    #if too little skies found
-
     if len(file_names) < 10:
         print_stage("WARNING: The number of skies found/generated are less than 10. A very small number of skies will not give robust statistics. You change the contaminant fraction or max overlap allowed to increase the number of skies.")
-
     all_gal_lines = open(galfit_params).readlines()
 
     #read all the .gal file created in temp dir
@@ -142,7 +143,6 @@ def unc_pipeline(iniconf):
             new_g.write(tli)
         new_g.close()
 
-
     #now run these individual galfit files
     all_gal_params = glob.glob(sky_dir + "/" + "*.gal")
 
@@ -159,11 +159,15 @@ def unc_pipeline(iniconf):
             else:
                 command2 = ""
             os.system(command1+command2)
-    if run_parallel == "True":
-        all_gal_params = np.array(all_gal_params)
-        run_in_parallel(run_gal, all_gal_params)
 
-    print_stage("All the galfit models have been run!",ch="-")
+    if run_parallel == "True":
+        input_stuff = []
+        for i in range(len(all_gal_params)):
+            dicti = {"gpi": all_gal_params[i], "run_on_lipwig": "True"}
+            input_stuff.append(dicti)
+
+        run_in_parallel(run_gal,input_stuff)
+
 
     #now computing uncertainties 
 
