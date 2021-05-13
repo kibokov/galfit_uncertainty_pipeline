@@ -106,6 +106,12 @@ def unc_pipeline(iniconf):
     ###########
 
     file_names = glob.glob(sky_dir + "/" + "*.fits")
+
+    #if too little skies found
+
+    if len(file_names) < 10:
+        print_stage("WARNING: The number of skies found/generated are less than 10. A very small number of skies will not give robust statistics. You change the contaminant fraction or max overlap allowed to increase the number of skies.")
+
     all_gal_lines = open(galfit_params).readlines()
 
     #read all the .gal file created in temp dir

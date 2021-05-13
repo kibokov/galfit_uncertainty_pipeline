@@ -16,8 +16,8 @@ F) none                # <<<<<< mask image (0=use, 1=ignore)
 G) %s                    # <<<<<< File with parameter constraints (ASCII file) 
 H) %s %s %s %s  # <<<<<< region in A) for fit, as x1 x2 y1 y2 
 I) %s %s             # size of the convolution
-J) 31.169              # <<<<<< Magnitude photometric zeropoint * 
-K) 0.200  0.200       # Image scale in arcsec/pix
+J) %s              # <<<<<< Magnitude photometric zeropoint * 
+K) 0.16  0.16       # Image scale in arcsec/pix
 O) regular             # Display type (regular, curses, both)
 P) 0                   # <<<<<< Choose: 0=optimize, 1=model, 2=imgblock, 3=subcomps **
 
@@ -72,15 +72,21 @@ def galshift(iniconf,working_in_cutout="False"):
     new_gal_path = data_dir + "/" + galfit_params
 
     with open(new_gal_path,"w") as new_gal:
+        #read the zeropoint magnitude, pixel scale
+        #also read the size of the convolution box
+        conv_x = g.convbox_x
+        conv_y = g.convbox_y
+        mag_zpt = g.input_magzpt
+
         if working_in_cutout == "False":
             new_x1 = str(int(g.box_x1) - int(g.box_x0)+1)
             new_y1 = str(int(g.box_y1) - int(g.box_y0)+1)
             #new_x1, new_y1 will also be values for the convolution box size
-            new_gal.write(galfit_feedme%(g.input_datain, g.galfit_fits_file,g.input_psf, galfit_con ,"1",new_x1,"1",new_y1,new_x1, new_y1))
+            new_gal.write(galfit_feedme%(g.input_datain, g.galfit_fits_file,g.input_psf, galfit_con ,"1",new_x1,"1",new_y1,conv_x, conv_y, mag_zpt))
         else:
             conv_x = int(g.box_x1) - int(g.box_x0) + 1
             conv_y = int(g.box_y1) - int(g.box_y0) + 1
-            new_gal.write(galfit_feedme%(g.input_datain, g.galfit_fits_file,g.input_psf, galfit_con ,g.box_x0,g.box_x1,g.box_y0,g.box_y1,conv_x,conv_y))
+            new_gal.write(galfit_feedme%(g.input_datain, g.galfit_fits_file,g.input_psf, galfit_con ,g.box_x0,g.box_x1,g.box_y0,g.box_y1,conv_x,conv_y, mag_zpt))
 
         for key in g.__dict__.keys():
             if 'component_' in key:
