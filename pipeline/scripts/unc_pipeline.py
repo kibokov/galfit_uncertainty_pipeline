@@ -163,7 +163,11 @@ def unc_pipeline(iniconf):
     if run_parallel == "True":
         input_stuff = []
         for i in range(len(all_gal_params)):
-            dicti = {"gpi": all_gal_params[i], "run_on_lipwig": "True"}
+            if lipwig =="True":
+                dicti = {"gpi": all_gal_params[i], "run_on_lipwig": "True"}
+            if lipwig == "False":
+                dicti = {"gpi": all_gal_params[i], "run_on_lipwig": "False"}
+
             input_stuff.append(dicti)
 
         run_in_parallel(run_gal,input_stuff)
