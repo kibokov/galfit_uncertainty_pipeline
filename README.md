@@ -98,6 +98,9 @@ for component_i in components:
     
 final_mag = mag_zpt - 2.5*np.log10(tot_flux)
 ```
+The zeropoint is automatically read from your galfit config files (fixing an earlier error where it was assumed to be 31.169).
+
+
 5. For some OS, the galfit executable might not be downloading properly while cloning it from github. So a good idea is to replace the galfit executable from the cloned version with the version you already have on your machine. For Mac OS, i do not think this is an issue. However, for Linux this will be an issue.
 
 5. When plotting the histogram of magnitudes, extract the columns from the final text file. Each column corresponds to a object. The first row is for the magnitudes from your original galfit model. Rest all rows are for the fake skies generated. 
